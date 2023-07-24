@@ -10,7 +10,7 @@ def create(request : schemas.User, db : Session):
         mot_de_passe = Hash.bcrypt(request.mot_de_passe), 
         E_mail = request.E_mail, 
         id_adresse = request.id_adresse,
-        role = request.role
+        role = request.role,
         )
     
     db.add(new_user)

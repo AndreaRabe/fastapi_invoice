@@ -8,6 +8,7 @@ class User(Base):
     E_mail = Column(String(100))
     nom_utilisateur = Column(String(100))
     mot_de_passe = Column(String(200))
+    montant_payer = Column(Float) # from invoice
     role = Column(Boolean, default=0)                  # 0 if an user and 1 if an admin
     id_adresse = Column(Integer, ForeignKey("Adresses.id"))
     
@@ -38,7 +39,7 @@ class Materiel(Base):
     nom_materiel = Column(String(100))
     duree_utilisation = Column(Float)
     nombre_kw = Column(Float)
-    montant_payer = Column(Float)
+    montant = Column(Float)
     id_user = Column(Integer, ForeignKey("Utilisateurs.id"))
 
     materiel_user = relationship("User", back_populates="user_materiel")

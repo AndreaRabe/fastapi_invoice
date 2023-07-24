@@ -55,6 +55,7 @@ class ShowUser(BaseModel):
     nom_utilisateur : str
     user_adresse : AdresseData
     user_materiel : List[MaterielData] = []
+    montant_payer : float | None = None
     class Config():
         orm_mode = True
 
@@ -77,6 +78,7 @@ class ShowMateriel(BaseModel):
     nom_materiel : str
     duree_utilisation : float
     nombre_kw : float
+    montant: float
     materiel_user : UserData
     class Config():
         orm_mode = True

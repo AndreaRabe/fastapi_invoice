@@ -1,20 +1,31 @@
 from datetime import date
-from fastapi import HTTPException, status
+from fastapi import HTTPException, status, Depends
 import models, schemas
 from hashing import Hash
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
+from function import payed
+from database import get_db
 
 def create(request : schemas.Facture, db : Session):
-    new_facture = models.Facture(
-        ref_facture = request.ref_facture,
-        date = request.date, 
-        montant = request.montant,
-        id_adresse = request.id_adresse)
+    try:
+        new_facture = models.Facture(
+            ref_facture = request.ref_facture,
+            date = request.date, 
+            montant = request.montant,
+            id_adresse = request.id_adresse)
+        
+        db.add(new_facture)
+        db.commit()
+        payed(request.id_adresse, request.montant, db) # i don't know if it works
+        db.refresh(new_facture)
+        return new_facture
     
-    db.add(new_facture)
-    db.commit()
-    db.refresh(new_facture)
-    return new_facture
+    except IntegrityError as e:
+        print("Integrity Error: Duplicate entry for primary key")
+
+    except Exception as e:
+        print("Unexpected Error:", str(e))
 
 def get_one(ref_facture : str, db : Session):
     facture = db.query(models.Facture).filter(models.Facture.ref_facture == ref_facture).first()
