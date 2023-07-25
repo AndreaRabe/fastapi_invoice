@@ -7,7 +7,7 @@ import schemas, models
 from sqlalchemy.orm import Session
 from database import get_db
 from hashing import Hash
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordRequestForm
 
 router = APIRouter(
     tags=['Authentification']
