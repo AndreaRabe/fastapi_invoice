@@ -1,5 +1,5 @@
 from datetime import timedelta
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Security, status
 from typing import List
 
 from jwtToken import ACCESS_TOKEN_EXPIRE_MINUTES, create_access_token
@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 @router.post('/login')
-def login(request: OAuth2PasswordRequestForm = Depends()):
+def login(request: OAuth2PasswordRequestForm = Security(), db: Session = Depends(get_db)):
     # Query the database to get the user with the provided email
     user = db.query(models.User).filter(models.User.E_mail == request.username).first()
 
