@@ -1,5 +1,4 @@
 import motor
-
 host = "cluster0.rusc6nw.mongodb.net"
 port = 27017
 username = "devilnut28"
@@ -12,6 +11,7 @@ MONGODB_URI = f"mongodb+srv://{username}:{password}@{host}:{port}/{database_name
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGODB_URI)
 db = client[database_name]
 collection = db.collection("app_mobs")
+
 
 async def get_db():
     db = await db.client().start_session()
