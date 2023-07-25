@@ -9,10 +9,12 @@ from database import get_db
 from hashing import Hash
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
-router = APIRouter(tags=['Authentification'])
+router = APIRouter(
+    tags=['Authentification']
+)
 
 @router.post('/login')
-def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(database.get_db)):
+def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     # Query the database to get the user with the provided email
     user = db.query(models.User).filter(models.User.E_mail == request.username).first()
 
