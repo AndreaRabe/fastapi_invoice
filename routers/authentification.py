@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 @router.post('/login')
-def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+def login(request: OAuth2PasswordRequestForm = Depends()):
     # Query the database to get the user with the provided email
     user = db.query(models.User).filter(models.User.E_mail == request.username).first()
 
