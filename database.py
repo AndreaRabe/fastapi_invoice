@@ -1,4 +1,7 @@
 import motor.motor_asyncio
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
 
 host = "cluster0.rusc6nw.mongodb.net"
 username = "devilnut28"
