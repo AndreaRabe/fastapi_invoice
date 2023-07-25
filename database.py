@@ -1,4 +1,4 @@
-import motor
+import motor.motor_asyncio
 host = "cluster0.rusc6nw.mongodb.net"
 port = 27017
 username = "devilnut28"
