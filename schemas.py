@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Union
+from typing import List, Optional, Union
 from datetime import date
 
 # schemas for all models
@@ -7,8 +7,8 @@ class User(BaseModel):
     E_mail : str
     nom_utilisateur : str
     mot_de_passe : str
-    id_adresse : Union(int,None) = None
-    role : Union(int,None) = None
+    id_adresse : Optional[int] = None
+    role : Optional[bool] = None
 
 class UserData(BaseModel):
     id : int
@@ -55,7 +55,7 @@ class ShowUser(BaseModel):
     nom_utilisateur : str
     user_adresse : AdresseData
     user_materiel : List[MaterielData] = []
-    montant_payer : Union(float,None) = None
+    montant_payer : Optional[float] = None
     class Config():
         orm_mode = True
 
@@ -90,6 +90,6 @@ class Token(BaseModel):
     token_type : str
 
 class TokenData(BaseModel):
-    email : Union(str,None) = None
+    email : Optional[str] = None
 
 
