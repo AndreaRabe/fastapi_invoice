@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "mysql+mysqlconnector://freedb_rabe44:xpVn76&2KYK5CYv@sql.freedb.tech:3306/freedb_app_flutter" # put here the name of your database here
+SQLALCHEMY_DATABASE_URL = "mysql+mysqlconnector://appmobile_comparedot:edf99e2e13cad9ac729e8dd256d1d1e60614912d@9hy.h.filess.io:3307/appmobile_comparedot" # put here the name of your database here
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
