@@ -4,5 +4,6 @@ micros:
   - name: fastapi-deta
     src: .
     engine: python3.9
+    public: true
     run: uvicorn main:app
 
