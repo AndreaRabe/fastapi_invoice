@@ -28,7 +28,7 @@ def login(request: OAuth2PasswordRequestForm = Depends, db: Session = Depends(ge
 
     # Create an access token with the user's email as the subject (sub)
     access_token = create_access_token(
-        data={"sub": user.E_mail}, expires_delta=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        data={"sub": user.E_mail}
     )
 
     # Return the access token along with the token type
