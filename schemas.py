@@ -92,4 +92,9 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     email : Optional[str] = None
 
+class auth(BaseModel):
+    sub : str
+    class Config():
+        orm_mode = True
+
 
