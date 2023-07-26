@@ -31,3 +31,4 @@ def login(request: OAuth2PasswordRequestForm = Depends, db: Session = Depends(ge
 
     # Return the access token along with the token type
     #return {"access_token": access_token, "token_type": "bearer"}
+    return access_token
