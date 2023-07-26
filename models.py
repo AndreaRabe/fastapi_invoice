@@ -10,7 +10,7 @@ class User(Base):
     mot_de_passe = Column(String(200))
     montant_payer = Column(Float) # from invoice
     role = Column(Boolean, default=0)                  # 0 if an user and 1 if an admin
-    id_adresse = Column(Integer, ForeignKey("Adresses.id"))
+    id_adresse = Column(Integer, ForeignKey("Adresses.id"), nullable=True, default=None)
     
     user_adresse = relationship("Adresse", back_populates="adresse_user")
     user_materiel = relationship("Materiel", back_populates="materiel_user")
