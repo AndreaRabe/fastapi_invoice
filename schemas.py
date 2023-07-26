@@ -53,7 +53,7 @@ class MaterielData(Materiel):
 
 class ShowUser(BaseModel):
     nom_utilisateur : str
-    user_adresse : AdresseData
+    user_adresse : Optional[AdresseData] = None
     user_materiel : List[MaterielData] = []
     montant_payer : Optional[float] = None
     class Config():
