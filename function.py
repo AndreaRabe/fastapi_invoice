@@ -6,7 +6,7 @@ from database import get_db
 
 price = 160  # price of kw in ariary
 
-def payed(id_adresse: int, facture_montant: float, db : Session = Depends(get_db)):
+def payed(id_adresse: int, facture_montant: float, rano : float, db : Session = Depends(get_db)):
     montant_materiels_par_utilisateur = db.query(User.nom_utilisateur, func.sum(Materiel.montant))\
         .join(Facture, User.id_adresse == Facture.id_adresse)\
         .join(Materiel, User.id == Materiel.id_user)\
@@ -16,6 +16,8 @@ def payed(id_adresse: int, facture_montant: float, db : Session = Depends(get_db
 
     total_montant_materiels = sum(montant for _, montant in montant_materiels_par_utilisateur)
     nombre_utilisateurs = len(montant_materiels_par_utilisateur)
+
+    rano_vola = rano/nombre_utilisateurs
 
     if facture_montant == total_montant_materiels:
         montant_plus = 0.0
@@ -36,6 +38,7 @@ def payed(id_adresse: int, facture_montant: float, db : Session = Depends(get_db
         if not user:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
         user.montant_payer = montant_materiels + montant_plus
+        user.montant_rano = rano_vola
     db.commit()
 
 

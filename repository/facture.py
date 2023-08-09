@@ -1,11 +1,9 @@
 from datetime import date
-from fastapi import HTTPException, status, Depends
+from fastapi import HTTPException, status
 import models, schemas
-from hashing import Hash
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from function import payed
-from database import get_db
 
 def create(request : schemas.Facture, db : Session):
     try:
@@ -13,19 +11,25 @@ def create(request : schemas.Facture, db : Session):
             ref_facture = request.ref_facture,
             date = request.date, 
             montant = request.montant,
+            rano = request.rano,
             id_adresse = request.id_adresse)
         
         db.add(new_facture)
         db.commit()
-        payed(request.id_adresse, request.montant, db) # i don't know if it works
+        payed(request.id_adresse, request.montant, request.rano, db)
         db.refresh(new_facture)
         return new_facture
     
     except IntegrityError as e:
+        # Handle IntegrityError exception
         print("Integrity Error: Duplicate entry for primary key")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Duplicate entry for primary key")
 
     except Exception as e:
+        # Handle other exceptions
         print("Unexpected Error:", str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal server error")
+
 
 def get_one(ref_facture : str, db : Session):
     facture = db.query(models.Facture).filter(models.Facture.ref_facture == ref_facture).first()

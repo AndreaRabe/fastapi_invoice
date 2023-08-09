@@ -31,3 +31,9 @@ def update(id : int, request : schemas.Adresse, db : Session):
     adresse.update(adresse_data)
     db.commit()
     return 'Updated successfully'
+
+def search_name(name : str, db : Session):
+    adresse = db.query(models.Adresse).filter(models.Adressse.nom_adresse.ilike(f"%{name}%")).all()
+    if not adresse:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'User with this name : {name} not found')
+    return adresse

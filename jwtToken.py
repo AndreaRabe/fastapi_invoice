@@ -17,9 +17,15 @@ def create_access_token(data: dict):
 def verify_token(token : str, credentials_exception):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        nom : str = payload.get("sub")
-        if nom is None:
+        email: str = payload.get("email")  # Récupérer l'email depuis le token
+        id_adresse: int = payload.get("adresse")  # Récupérer l'id_adresse depuis le token
+        nom: str = payload.get("nom")
+        id: int = payload.get("id")
+
+        
+        if email is None or id_adresse is None or nom is None or id is None:
             raise credentials_exception
-        token_data = schemas.TokenData(nom=nom)
+            
+        token_data = schemas.TokenData(email=email, id_adresse=id_adresse, id=id, nom=nom)  # Créer un objet TokenData avec les informations
     except JWTError:
         raise credentials_exception

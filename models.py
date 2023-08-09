@@ -9,7 +9,8 @@ class User(Base):
     nom_utilisateur = Column(String(100))
     mot_de_passe = Column(String(200))
     montant_payer = Column(Float) # from invoice
-    role = Column(Boolean, default=0)                  # 0 if an user and 1 if an admin
+    montant_rano = Column(Float)
+    role = Column(Boolean, default=0) # 0 if an user and 1 if an admin
     id_adresse = Column(Integer, ForeignKey("Adresses.id"), nullable=True, default=None)
     
     user_adresse = relationship("Adresse", back_populates="adresse_user")
@@ -21,6 +22,7 @@ class Facture(Base):
     ref_facture = Column(String(150), primary_key=True, index=True)
     date = Column(Date)
     montant = Column(Float)
+    rano = Column(Float)
     id_adresse = Column(Integer, ForeignKey("Adresses.id"))
 
     facture_adresse = relationship("Adresse", back_populates="adresse_facture")

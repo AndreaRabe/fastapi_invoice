@@ -21,6 +21,7 @@ class Facture(BaseModel):
     ref_facture: str
     date : date
     montant : float
+    rano : float
     id_adresse : int
 
 class FactureData(BaseModel):
@@ -34,6 +35,7 @@ class Adresse(BaseModel):
     nom_adresse : str
 
 class AdresseData(Adresse):
+    id : int
     class Config():
         orm_mode = True
 
@@ -44,6 +46,7 @@ class Materiel(BaseModel):
     id_user : int
 
 class MaterielData(Materiel):
+    id : int
     class Config():
         orm_mode = True
 
@@ -52,10 +55,13 @@ class MaterielData(Materiel):
 # i don't know if i need to put | None = None for all of list
 
 class ShowUser(BaseModel):
+    id : int
     nom_utilisateur : str
     user_adresse : Optional[AdresseData] = None
+    id_adresse : Optional[int] = None
     user_materiel : List[MaterielData] = []
     montant_payer : Optional[float] = None
+    montant_rano :  Optional[float] = None
     class Config():
         orm_mode = True
 
@@ -63,11 +69,13 @@ class ShowFacture(BaseModel):
     ref_facture : str
     date : date
     montant : float
+    rano : float
     facture_adresse : AdresseData
     class Config():
         orm_mode = True
 
 class ShowAdresse(BaseModel):
+    id : int
     nom_adresse : str
     adresse_user : List[UserData] = []
     adresse_facture : List[FactureData] = []
@@ -75,6 +83,7 @@ class ShowAdresse(BaseModel):
         orm_mode = True
 
 class ShowMateriel(BaseModel):
+    id : int
     nom_materiel : str
     duree_utilisation : float
     nombre_kw : float
