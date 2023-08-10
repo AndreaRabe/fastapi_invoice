@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./deploy/Dockerfile
+      target: prod
+    image: flutter:${FLUTTER_VERSION:-latest}
+    restart: always
+    env_file:
+    - .env
+    environment:
+      FLUTTER_HOST: 0.0.0.0
+      FLUTTER_DB_FILE: /db_data/db.sqlite3
+    volumes:
+    - flutter-db-data:/db_data/
+
+  migrator:
+    image: flutter:${FLUTTER_VERSION:-latest}
+    restart: "no"
+    command: alembic upgrade head
+    environment:
+      FLUTTER_DB_FILE: /db_data/db.sqlite3
+    volumes:
+    - flutter-db-data:/db_data/
+
+
+
+volumes:
+  flutter-db-data:
+    name: flutter-db-data
