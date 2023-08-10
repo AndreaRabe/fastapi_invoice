@@ -28,7 +28,7 @@ def login(username: str = Form(...), password: str = Form(...), db: Session = De
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Incorrect password')
 
       # Create an access token with the user's email and id_adresse as the subject (sub)
-    access_token = create_access_token(data={"email": user.E_mail, "id": user.id, "nom" : user.nom_utilisateur, "adresse" : user.id_adresse})
+    access_token = create_access_token(data={"email": user.E_mail, "id": user.id, "nom" : user.nom_utilisateur, "role" : user.role, "adresse" : user.id_adresse})
 
     # Return the access token along with the token type
     return schemas.Token(access_token=access_token, token_type="bearer")
