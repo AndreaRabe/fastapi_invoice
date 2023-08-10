@@ -4,3 +4,4 @@ repository/__pycache__
 routers/__pycache__
 .space
 .idea
+.venv/
