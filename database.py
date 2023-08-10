@@ -2,7 +2,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "mysql+mysqlconnector://appmobile_comparedot:edf99e2e13cad9ac729e8dd256d1d1e60614912d@9hy.h.filess.io:3307/appmobile_comparedot" # put here the name of your database here
+## SQLALCHEMY_DATABASE_URL = "mysql+mysqlconnector://appmobile_comparedot:edf99e2e13cad9ac729e8dd256d1d1e60614912d@9hy.h.filess.io:3307/appmobile_comparedot" # put here the name of your database here
+## SQLite database, for testing
+SQLALCHEMY_DATABASE_URL = "sqlite:///./database.db" # put here the name of your database here
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
