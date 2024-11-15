@@ -13,8 +13,7 @@ A backend application built with FastAPI for managing and generating invoices ef
 3. [Technologies Used](#technologies-used)  
 4. [Installation](#installation)  
 5. [Usage](#usage)  
-6. [API Endpoints](#api-endpoints)  
-9. [Contact](#contact)  
+6. [Contact](#contact)  
 
 ---
 
@@ -88,17 +87,6 @@ Invoice management is a robust and scalable backend solution for invoice managem
 - Interact with the endpoints to create, retrieve, and manage invoices.  
 
 ---
-
-## **API Endpoints**
-
-Here are the key endpoints of the application:  
-
-### **Invoices**
-- `GET /invoices/`: Retrieve a list of all invoices.  
-- `GET /invoices/{id}/`: Retrieve details of a specific invoice.  
-- `POST /invoices/`: Create a new invoice (requires JSON payload).  
-- `PUT /invoices/{id}/`: Update an existing invoice.  
-- `DELETE /invoices/{id}/`: Delete an invoice.  
 
 ### Example JSON Payload for Invoice Creation:
 ```json
